@@ -1,17 +1,5 @@
 (ns quiescent)
 
-(defn js-props
-  "Utility function. Takes an object which is (possibly) a
-  ClojureScript map. If the value is a ClojureScript map, convert it
-  to a JavaScript properties object. Otherwise, return the argument
-  unchanged."
-  [obj]
-  (if (map? obj)
-    (let [o (js-obj)]
-      (doseq [[k v] obj] (aset o (name k) v))
-      o)
-    obj))
-
 (defn component
   "Build a ReactJS component, using the provided function as the
   implementation for React's 'render' method. The given function
