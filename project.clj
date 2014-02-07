@@ -19,8 +19,8 @@
                       {:output-to "examples/resources/public/main.js"
                        :output-dir "examples/resources/public/build"
                        :optimizations :whitespace
-                       :preamble ["react/react.js"]
-                       :externs ["react/react-externs.js"]
+                       :preamble ["react/react.min.js"]
+                       :externs ["react/externs/react.js"]
                        :pretty-print true
                        :source-map
                        "examples/resources/public/main.js.map"
