@@ -34,6 +34,8 @@
 
 (comment
 
+  (component-did-update d/input {} (fn))
+
   (component-did-update (d/input {})
                         (fn [new-value old-value dom]
                           (if (:active dom))
@@ -45,44 +47,3 @@
     ()
     )
 )
-
-
-
-
-
-(defn focusable
-  "Given a Quiescent component constructor function, return a
-  component constructor that wraps the original, with the difference
-  that it observes a :takeFocus key in its props value.
-
-  Whenever the component is rendered, if :takeFocus is truth, the
-  component will steal focus.
-
-  To ensure a consistent user experience, clients are responsible for
-  ensuring that multiple elements do not have :takeFocus set at once,
-  or that elements are not stealing the focus when a user is trying
-  to interact elsewhere."
-  [ctor]
-  (let [component
-        (js/React.createClass
-         #js {:render
-              (fn []
-                (this-as this
-                         (apply ctor (.. this -props -props)
-                                (.. this -props -children))))
-              :componentDidUpdate
-              (fn []
-                (this-as this
-                         (if-let [focus? (:takeFocus (.. this -props -props))]
-                           (.focus (.getDOMNode this)))))})]
-    (fn [props & children]
-      (component #js {:props props
-                      :children children}))))
-
-;; Define focusable consturctors for elements that can take focus
-(def focusable-input (focusable input))
-(def focusable-select (focusable select))
-(def focusable-textarea (focusable textarea))
-(def focusable-button (focusable button))
-(def focusable-area (focusable area))
-(def focusable-a (focusable a))
