@@ -1,5 +1,9 @@
 (ns quiescent)
 
+(def ^:dynamic *component*
+  "Within a component render function, will be bound to the raw
+  ReactJS component." nil)
+
 (defn component
   "Return a function that will return a ReactJS component, using the
   provided function as the implementation for React's 'render' method
@@ -18,16 +22,17 @@
                            (fn [next-props _]
                              (this-as this
                                       (not= (.. this -props -value)
-                                            (.. next-props -value))))
+                                              (.. next-props -value))))
                            :render
                            (fn []
                              (this-as this
-                                      (apply renderer
-                                             (.. this -props -value)
-                                             (.. this -props -static-args))))})]
+                                 (binding [*component* this]
+                                   (apply renderer
+                                          (.. this -props -value)
+                                          (.. this -props -statics)))))})]
     (fn [value & static-args]
       (react-component #js {:value value
-                            :static-args static-args}))))
+                            :statics static-args}))))
 
 (defn render
   "Given a ReactJS component, render it, rooted to the specified DOM
