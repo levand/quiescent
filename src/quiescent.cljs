@@ -21,34 +21,33 @@
            #js {:shouldComponentUpdate
                 (fn [next-props _]
                   (this-as this
-                           (not= (.. this -props -value)
-                                 (.. next-props -value))))
+                           (not= (aget (.-props this) "value")
+                                 (aget next-props "value"))))
                 :render
                 (fn []
                   (this-as this
                            (binding [*component* this]
                              (apply renderer
-                                    (.. this -props -value)
-                                    (.. this -props -statics)))))})]
+                                    (aget (.-props this) "value")
+                                    (aget (.-props this) "statics")))))})]
     (fn [value & static-args]
-      (react-component #js {:value value
-                            :statics static-args}))))
+      (react-component #js {:value value :statics static-args}))))
 
 (def WrapperComponent
   "Wrapper component used to mix-in lifecycle access"
   (.createClass js/React
      #js {:render
-          (fn [] (this-as this (-> this .-props .-wrappee)))
+          (fn [] (this-as this (aget (.-props this) "wrappee")))
           :componentDidUpdate
           (fn [prev-props prev-state node]
             (this-as this
-              (when-let [f (-> this .-props .-onUpdate)]
+              (when-let [f (aget (.-props this) "onUpdate")]
                 (binding [*component* this]
                   (f node)))))
           :componentDidMount
           (fn [node]
             (this-as this
-              (when-let [f (-> this .-props .-onMount)]
+              (when-let [f (aget (.-props this) "onMount")]
                        (f node))))}))
 
 (defn on-update
