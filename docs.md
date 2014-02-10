@@ -49,7 +49,7 @@ namespace containing a useful macro you can include using
                          {:title "Programming: you're doing it completely wrong"
                           :body "..."
                           :author {:name "Rich Hickey"
-                                  :email "rich@example.com}}]})
+                                  :email "rich@example.com"}}]})
 
 ;; Render it!
 (q/render (ArticleList my-data)
