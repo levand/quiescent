@@ -2,12 +2,16 @@
 
 ## Installation
 
-Add `[quiescent "0.1.0"]` to your ClojureScript project's
-`project.clj` file.
+Quiescent is not yet available in a public Maven repository. To
+install, clone the repository, check out the "0.1.0" tag and run `lein
+install` from the root directory.
+
+Then, add `[quiescent "0.1.0"]` to the dependencies in your
+ClojureScript project's `project.clj` file.
 
 Require the `quiescent` and/or `quiescent.dom` namespace in your
 ClojureScript source file. There is also a `quiescent` *Clojure*
-namespace containing a useful macro you can include using
+namespace containing a useful macro which you can include using
 `:require-macros` or `:include-macros`.
 
 ### tl;dr Example
