@@ -48,7 +48,7 @@ It has the following design goals:
    allowing users to construct a ReactJS component tree using only the
    basic tools of functional programming: function definition and
    composition.
-* **top-down rendering:**: All renders and updates are initiated by
+* **top-down rendering:** All renders and updates are initiated by
    instructing Quiescent to render a particular value to a particular
    location in the DOM. Individual tree components do not maintain
    their own state and do not re-render themselves unless explicitly
@@ -81,7 +81,7 @@ React, as described below.
 ### Comparison with Om
 
 [Om](http://github.com/swannodette/om) is another ClojureScript interface to ReactJS, highly capable and
-well-designed. It provides catagorically more features than Quiescent,
+well-designed. It provides categorically more features than Quiescent,
 at the cost of taking more control and specifying more rigidly the way
 application state is modeled, updated and re-rendered.
 
@@ -105,12 +105,12 @@ The most important conceptual distinctions are:
   that all data is application data, whether it is transient or
   persistent, important or insignificant, wherever it is actually
   located. There is little harm in including it in the top-level data
-  structure, and if your application does demand a heierarchy of data
+  structure, and if your application does demand a hierarchy of data
   (persistent vs. transient, etc) for different purposes, it is better
   to model that relationship explicitly rather than leaving transient
   data tucked invisibly away in component state.
 
-  2. _"Local state is always up-to-date"_ this is not relevant in
+  2. _"Local state is always up-to-date."_ This is not relevant in
   Quiescent's render model because Quiescent does not manage state.
 
 * Om components are always aware of their location in the primary
