@@ -30,7 +30,7 @@ namespace containing a useful macro you can include using
    "Component representing an article"
    [article]
    (d/div {:className "article"}
-     (d/div {:className "title} (:title a))
+     (d/div {:className "title"} (:title a))
      (AuthorName (:author a))
      (d/div {:className "article-body"} (:body a))))
 
