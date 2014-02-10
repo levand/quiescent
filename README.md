@@ -150,7 +150,7 @@ matter) are:
   whatever ratoms are referenced in their definition.
 * Reagent, like Om, maintains full control of the render/re-render cycle.
 
-Although I do not have as much first-hand experience with Reagint, it
+Although I do not have as much first-hand experience with Reagent, it
 seems to be a very convenient approach and if it meets your needs you
 should definitly give it a try.
 
