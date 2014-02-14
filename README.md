@@ -40,7 +40,7 @@ It has the following design goals:
    application, or force the use of any specific technique for
    managing state updates. Feel free to use atoms, watchers,
    core.async, compilation-based models, message-passing, etc. The
-   only requierment is that values passed to Quiescent components are
+   only requirement is that values passed to Quiescent components are
    immutable value types.
 * **avoid OO idioms:** ReactJS is itself highly object-oriented, with
    stateful objects that may implement a variety of
