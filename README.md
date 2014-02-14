@@ -80,10 +80,11 @@ React, as described below.
 
 ### Comparison with Om
 
-[Om](http://github.com/swannodette/om) is another ClojureScript interface to ReactJS, highly capable and
-well-designed. It provides categorically more features than Quiescent,
-at the cost of taking more control and specifying more rigidly the way
-application state is modeled, updated and re-rendered.
+[Om](http://github.com/swannodette/om) is another ClojureScript
+interface to ReactJS, highly capable and well-designed. It provides
+categorically more features than Quiescent, at the cost of taking more
+control and specifying more rigidly the way application state is
+modeled, updated and re-rendered.
 
 The most important conceptual distinctions are:
 
@@ -169,7 +170,8 @@ changed. If so, the component re-renders. If not, it doesn't.
 by the user. The output of this render function is presumed to be a
 single ReactJS component, as it is in vanilla ReactJS. The function,
 however, is passed the immutable value that was used to construct the
-function (and any static
+function. It is also passed any additional arguments that were
+provided to the component constructor.
 
 ## Future Plans
 
