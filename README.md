@@ -42,12 +42,14 @@ It has the following design goals:
    core.async, compilation-based models, message-passing, etc. The
    only requirement is that values passed to Quiescent components are
    immutable value types.
+
 * **avoid OO idioms:** ReactJS is itself highly object-oriented, with
    stateful objects that may implement a variety of
    behaviors. Quiescent provides a purely functional interface,
    allowing users to construct a ReactJS component tree using only the
    basic tools of functional programming: function definition and
    composition.
+
 * **top-down rendering:** All renders and updates are initiated by
    instructing Quiescent to render a particular value to a particular
    location in the DOM. Individual tree components do not maintain
@@ -60,6 +62,7 @@ It has the following design goals:
    does not actually do this, for performance reasons, but the fact
    that it does not is an implementation detail; the conceptual model
    is the same.
+
 * **leverage immutability:** By assuming that any value provided to a
    rendered component is immutable, Quiescent can prevent ReactJS from
    even calculating if it needs to render sub-trees that have not
@@ -68,6 +71,7 @@ It has the following design goals:
    application structures can be re-rendered frequently with almost no
    performance hit apart from that necessary to re-render leaf nodes
    that actually did change.
+
 * **compatibility:** Although you will hopefully be able to write the
    vast majority of your application using Quiescent's model,
    you can, if necessary, always fall back and use a raw
@@ -90,9 +94,11 @@ The most important conceptual distinctions are:
 * To create an Om component you must implement a protocol; due to its
   relative lack of capability, Quiescent only requires components to
   provide a single render function.
+
 * Om controls the primary application state atom and how it is
   updated. In Quiescent this is entirely the responsibility of the
   consumer.
+
 * Om explicitly allows components to maintain local state, while
   Quiescent forbids this. In my opinion the benefits of requiring
   components to account for local state do not justify the pervasive
@@ -142,12 +148,14 @@ matter) are:
 * Reagent defaults to a
   [Hiccup](https://github.com/weavejester/hiccup)-like syntax for
   component definitions.
+
 * Reagent handles updates via a special version of an atom (a
   *reactive atom* or *ratom*). Whenever a component references a ratom,
   watches are established such that the component will re-render when
   the value of the ratom changes. As such, Reagent components are not
   driven by top-down data or a singular application state, but by
   whatever ratoms are referenced in their definition.
+
 * Reagent, like Om, maintains full control of the render/re-render cycle.
 
 Although I do not have as much first-hand experience with Reagent, it
