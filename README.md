@@ -16,7 +16,7 @@ etc.
 ReactJS is an extremely interesting approach to UI rendering for
 HTML-based web applications. Its core value proposition is to make it
 possible to write one set of UI rendering code that works for both
-initial creation, and any future updates. Updates are extremely
+initial creation and any future updates. Updates are extremely
 efficient, because only the minimal set of necessary deltas are
 actually sent to the DOM.
 
@@ -72,7 +72,7 @@ It has the following design goals:
    vast majority of your application using Quiescent's model, if
    absolutely necessary, you can always fall back and use a raw
    ReactJS component (or, for that matter, a ReactJS component
-   constructed using another ClojureScript interface.) This is
+   constructed using another ClojureScript interface). This is
    possible at any level of the rendering component tree.
 
 These goals differ slightly from other ClojureScript interfaces to
@@ -119,14 +119,14 @@ The most important conceptual distinctions are:
   components can dispatch updates to "themselves", whereas a DOM event
   handler function attached to a Quiescent component can only effect
   change by reaching back and doing something to the top-level
-  application state (e.g by sending a core.async message, swapping the
+  application state (e.g., by sending a core.async message, swapping the
   top-level atom, etc).
 
   This does, somewhat, negate the concept of component modularity;
-  Quiescent's contention is that the benefit of top-down value-based
+  Quiescent's contention is that the benefit of top-down, value-based
   rendering exceeds that of truly modular components.
 
-Ultimately, though, Om is an excellent, well-thought-out library and
+Ultimately, though, Om is an excellent, well-thought-out library, and
 if your needs or design goals more closely align with its capabilities
 than with Quiescent, you should absolutely use it.
 
@@ -151,7 +151,7 @@ matter) are:
 * Reagent, like Om, maintains full control of the render/re-render cycle.
 
 Although I do not have as much first-hand experience with Reagent, it
-seems to be a very convenient approach and if it meets your needs you
+seems to be a very convenient approach, and if it meets your needs you
 should definitely give it a try.
 
 ### Implementation
@@ -180,13 +180,13 @@ function (and any static
 * I have some ideas around creating a common protocol for obtaining
   ReactJS components that would make it much easier to provide
   alternative implementations and syntaxes for component definitions
-  (e.g, ERB, Yaml, Hiccup, Enlive, etc). There is a lot of potential
+  (e.g., ERB, Yaml, Hiccup, Enlive, etc). There is a lot of potential
   to suit the actual syntax used to define components to the
   developers (or designers!) tasked with designing the structure of
   the DOM.
 
   This could easily be rolled in as a part of Quiescent (and possibly
-  adopted by other ReactJS-based libraries as well.
+  adopted by other ReactJS-based libraries as well).
 
 ## See Also
 
