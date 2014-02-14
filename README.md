@@ -69,8 +69,8 @@ It has the following design goals:
    performance hit apart from that necessary to re-render leaf nodes
    that actually did change.
 * **compatibility:** Although you will hopefully be able to write the
-   vast majority of your application using Quiescent's model, if
-   absolutely necessary, you can always fall back and use a raw
+   vast majority of your application using Quiescent's model,
+   you can, if necessary, always fall back and use a raw
    ReactJS component (or, for that matter, a ReactJS component
    constructed using another ClojureScript interface). This is
    possible at any level of the rendering component tree.
