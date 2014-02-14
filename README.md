@@ -8,7 +8,7 @@ An obligatory [TodoMVC implementation](https://github.com/levand/todomvc/tree/gh
 See the [documentation](docs.md) for instructions and examples of how
 to use Quiescent.
 
-Quiescent is still alpha/experiental software, use at your own risk,
+Quiescent is still alpha/experimental software, use at your own risk,
 etc.
 
 ## Rationale
@@ -40,7 +40,7 @@ It has the following design goals:
    application, or force the use of any specific technique for
    managing state updates. Feel free to use atoms, watchers,
    core.async, compilation-based models, message-passing, etc. The
-   only requierment is that values passed to Quiescent components are
+   only requirement is that values passed to Quiescent components are
    immutable value types.
 * **avoid OO idioms:** ReactJS is itself highly object-oriented, with
    stateful objects that may implement a variety of
@@ -75,7 +75,7 @@ It has the following design goals:
    constructed using another ClojureScript interface.) This is
    possible at any level of the rendering component tree.
 
-Thee goals differ slightly from other ClojureScript interfaces to
+These goals differ slightly from other ClojureScript interfaces to
 React, as described below.
 
 ### Comparison with Om
@@ -116,7 +116,7 @@ The most important conceptual distinctions are:
 * Om components are always aware of their location in the primary
   application state, via a _cursor_ (a hybrid of functional zippers
   and lenses). Quiescent components are not. This means that Om
-  components can dispatch updates to "themselves", wheras a DOM event
+  components can dispatch updates to "themselves", whereas a DOM event
   handler function attached to a Quiescent component can only effect
   change by reaching back and doing something to the top-level
   application state (e.g by sending a core.async message, swapping the
@@ -140,10 +140,10 @@ The key differences between Reagent and Quiescent (or Om, for that
 matter) are:
 
 * Reagent defaults to a
-  [hiccup](https://github.com/weavejester/hiccup)-like syntax for
+  [Hiccup](https://github.com/weavejester/hiccup)-like syntax for
   component definitions.
 * Reagent handles updates via a special version of an atom (a
-  *reactive atom* or *ratom*). Whenver a component references a ratom,
+  *reactive atom* or *ratom*). Whenever a component references a ratom,
   watches are established such that the component will re-render when
   the value of the ratom changes. As such, Reagent components are not
   driven by top-down data or a singular application state, but by
@@ -152,11 +152,11 @@ matter) are:
 
 Although I do not have as much first-hand experience with Reagent, it
 seems to be a very convenient approach and if it meets your needs you
-should definitly give it a try.
+should definitely give it a try.
 
 ### Implementation
 
-This section presumes familarity with how ReactJS works.
+This section presumes familiarity with how ReactJS works.
 
 In short, basic Quiescent components implement only two of ReactJS's
 component lifecycle events:
@@ -179,7 +179,7 @@ function (and any static
 
 * I have some ideas around creating a common protocol for obtaining
   ReactJS components that would make it much easier to provide
-  alternative implementations and syntaxes for component defintions
+  alternative implementations and syntaxes for component definitions
   (e.g, ERB, Yaml, Hiccup, Enlive, etc). There is a lot of potential
   to suit the actual syntax used to define components to the
   developers (or designers!) tasked with designing the structure of
