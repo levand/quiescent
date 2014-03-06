@@ -48,7 +48,8 @@
           (fn [node]
             (this-as this
               (when-let [f (aget (.-props this) "onMount")]
-                       (f node))))}))
+                (binding [*component* this]
+                  (f node)))))}))
 
 (defn on-update
   "Wrap a component, specifying a function to be called on the
