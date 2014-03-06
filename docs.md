@@ -229,8 +229,8 @@ needed.
 
 These wrapping component constructors are:
 
-- `on-initial-render`: fires after a component is inserted into
-  the DOM for the first time
+- `on-mount`: fires after a component is inserted into the DOM for the
+  first time
 - `on-update`: fires whenever a component is re-rendered, but not on
   its initial render
 - `on-render`: fires every time a component is rendered or

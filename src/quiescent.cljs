@@ -60,7 +60,7 @@
   (WrapperComponent #js {:wrappee child
                          :onUpdate f}))
 
-(defn on-initial-render
+(defn on-mount
   "Wrap a component, specifying a function to be called on the
   componentDidMount lifecycle event.
 
