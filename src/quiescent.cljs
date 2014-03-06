@@ -49,7 +49,19 @@
             (this-as this
               (when-let [f (aget (.-props this) "onMount")]
                 (binding [*component* this]
-                  (f node)))))}))
+                  (f node)))))
+          :componentWillMount
+          (fn []
+            (this-as this
+              (when-let [f (aget (.-props this) "onWillMount")]
+                (binding [*component* this]
+                  (f)))))
+          :componentWillUnmount
+          (fn []
+            (this-as this
+              (when-let [f (aget (.-props this) "onWillUnmount")]
+                (binding [*component* this]
+                  (f)))))}))
 
 (defn on-update
   "Wrap a component, specifying a function to be called on the
@@ -78,6 +90,24 @@
   (WrapperComponent #js {:wrappee child
                          :onUpdate f
                          :onMount f}))
+
+(defn on-will-mount
+  "Wrap a component, specifying a function to be called on the
+  componentWillMount lifecycle event.
+
+  The function will be called with no arguments."
+  [child f]
+  (WrapperComponent #js {:wrappee child
+                         :onWillMount f}))
+
+(defn on-will-unmount
+  "Wrap a component, specifying a function to be called on the
+  componentWillUnmount lifecycle event.
+
+  The function will be called with no arguments."
+  [child f]
+  (WrapperComponent #js {:wrappee child
+                         :onWillUnmount f}))
 
 (defn render
   "Given a ReactJS component, immediately render it, rooted to the
