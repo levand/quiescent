@@ -11,7 +11,7 @@
   [obj]
   (if (map? obj)
     (let [o (js-obj)]
-      (doseq [[k v] obj] (aset o (name k) v))
+      (doseq [[k v] obj] (aset o (name k) (js-props v)))
       o)
     obj))
 
