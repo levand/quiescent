@@ -8,7 +8,7 @@ An obligatory [TodoMVC implementation](https://github.com/levand/todomvc/tree/gh
 See the [documentation](docs.md) for instructions and examples of how
 to use Quiescent.
 
-Quiescent is still alpha/experiental software, use at your own risk,
+Quiescent is still alpha/experimental software, use at your own risk,
 etc.
 
 ## Rationale
@@ -16,7 +16,7 @@ etc.
 ReactJS is an extremely interesting approach to UI rendering for
 HTML-based web applications. Its core value proposition is to make it
 possible to write one set of UI rendering code that works for both
-initial creation, and any future updates. Updates are extremely
+initial creation and any future updates. Updates are extremely
 efficient, because only the minimal set of necessary deltas are
 actually sent to the DOM.
 
@@ -40,14 +40,16 @@ It has the following design goals:
    application, or force the use of any specific technique for
    managing state updates. Feel free to use atoms, watchers,
    core.async, compilation-based models, message-passing, etc. The
-   only requierment is that values passed to Quiescent components are
+   only requirement is that values passed to Quiescent components are
    immutable value types.
+
 * **avoid OO idioms:** ReactJS is itself highly object-oriented, with
    stateful objects that may implement a variety of
    behaviors. Quiescent provides a purely functional interface,
    allowing users to construct a ReactJS component tree using only the
    basic tools of functional programming: function definition and
    composition.
+
 * **top-down rendering:** All renders and updates are initiated by
    instructing Quiescent to render a particular value to a particular
    location in the DOM. Individual tree components do not maintain
@@ -60,6 +62,7 @@ It has the following design goals:
    does not actually do this, for performance reasons, but the fact
    that it does not is an implementation detail; the conceptual model
    is the same.
+
 * **leverage immutability:** By assuming that any value provided to a
    rendered component is immutable, Quiescent can prevent ReactJS from
    even calculating if it needs to render sub-trees that have not
@@ -68,14 +71,15 @@ It has the following design goals:
    application structures can be re-rendered frequently with almost no
    performance hit apart from that necessary to re-render leaf nodes
    that actually did change.
+
 * **compatibility:** Although you will hopefully be able to write the
-   vast majority of your application using Quiescent's model, if
-   absolutely necessary, you can always fall back and use a raw
+   vast majority of your application using Quiescent's model,
+   you can, if necessary, always fall back and use a raw
    ReactJS component (or, for that matter, a ReactJS component
-   constructed using another ClojureScript interface.) This is
+   constructed using another ClojureScript interface). This is
    possible at any level of the rendering component tree.
 
-Thee goals differ slightly from other ClojureScript interfaces to
+These goals differ slightly from other ClojureScript interfaces to
 React, as described below.
 
 ### Comparison with Om
@@ -91,9 +95,11 @@ The most important conceptual distinctions are:
 * To create an Om component you must implement a protocol; due to its
   relative lack of capability, Quiescent only requires components to
   provide a single render function.
+
 * Om controls the primary application state atom and how it is
   updated. In Quiescent this is entirely the responsibility of the
   consumer.
+
 * Om explicitly allows components to maintain local state, while
   Quiescent forbids this. In my opinion the benefits of requiring
   components to account for local state do not justify the pervasive
@@ -117,17 +123,17 @@ The most important conceptual distinctions are:
 * Om components are always aware of their location in the primary
   application state, via a _cursor_ (a hybrid of functional zippers
   and lenses). Quiescent components are not. This means that Om
-  components can dispatch updates to "themselves", wheras a DOM event
+  components can dispatch updates to "themselves", whereas a DOM event
   handler function attached to a Quiescent component can only effect
   change by reaching back and doing something to the top-level
-  application state (e.g by sending a core.async message, swapping the
+  application state (e.g., by sending a core.async message, swapping the
   top-level atom, etc).
 
   This does, somewhat, negate the concept of component modularity;
-  Quiescent's contention is that the benefit of top-down value-based
+  Quiescent's contention is that the benefit of top-down, value-based
   rendering exceeds that of truly modular components.
 
-Ultimately, though, Om is an excellent, well-thought-out library and
+Ultimately, though, Om is an excellent, well-thought-out library, and
 if your needs or design goals more closely align with its capabilities
 than with Quiescent, you should absolutely use it.
 
@@ -141,23 +147,25 @@ The key differences between Reagent and Quiescent (or Om, for that
 matter) are:
 
 * Reagent defaults to a
-  [hiccup](https://github.com/weavejester/hiccup)-like syntax for
+  [Hiccup](https://github.com/weavejester/hiccup)-like syntax for
   component definitions.
+
 * Reagent handles updates via a special version of an atom (a
-  *reactive atom* or *ratom*). Whenver a component references a ratom,
+  *reactive atom* or *ratom*). Whenever a component references a ratom,
   watches are established such that the component will re-render when
   the value of the ratom changes. As such, Reagent components are not
   driven by top-down data or a singular application state, but by
   whatever ratoms are referenced in their definition.
+
 * Reagent, like Om, maintains full control of the render/re-render cycle.
 
 Although I do not have as much first-hand experience with Reagent, it
-seems to be a very convenient approach and if it meets your needs you
-should definitly give it a try.
+seems to be a very convenient approach, and if it meets your needs you
+should definitely give it a try.
 
 ### Implementation
 
-This section presumes familarity with how ReactJS works.
+This section presumes familiarity with how ReactJS works.
 
 In short, basic Quiescent components implement only two of ReactJS's
 component lifecycle events:
@@ -181,14 +189,14 @@ provided to the component constructor.
 
 * I have some ideas around creating a common protocol for obtaining
   ReactJS components that would make it much easier to provide
-  alternative implementations and syntaxes for component defintions
-  (e.g, ERB, Yaml, Hiccup, Enlive, etc). There is a lot of potential
+  alternative implementations and syntaxes for component definitions
+  (e.g., ERB, Yaml, Hiccup, Enlive, etc). There is a lot of potential
   to suit the actual syntax used to define components to the
   developers (or designers!) tasked with designing the structure of
   the DOM.
 
   This could easily be rolled in as a part of Quiescent (and possibly
-  adopted by other ReactJS-based libraries as well.
+  adopted by other ReactJS-based libraries as well).
 
 ## See Also
 

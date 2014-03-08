@@ -181,7 +181,7 @@ effect how an object renders.
 To support this use case, Quiescent allows you to pass more than one
 argument to a component constructor. Any additional arguments to a
 Quiescent component constructor will be passed through _as is_ to that
-componet's rendering function, but will _not_ be taken into account
+component's rendering function, but will _not_ be taken into account
 when deciding if a component needs to re-render.
 
 ```clojure
