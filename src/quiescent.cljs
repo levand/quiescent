@@ -39,16 +39,16 @@
      #js {:render
           (fn [] (this-as this (aget (.-props this) "wrappee")))
           :componentDidUpdate
-          (fn [prev-props prev-state node]
+          (fn [prev-props prev-state]
             (this-as this
               (when-let [f (aget (.-props this) "onUpdate")]
                 (binding [*component* this]
-                  (f node)))))
+                  (f (.getDOMNode this))))))
           :componentDidMount
-          (fn [node]
+          (fn []
             (this-as this
               (when-let [f (aget (.-props this) "onMount")]
-                       (f node))))}))
+                       (f (.getDOMNode this)))))}))
 
 (defn on-update
   "Wrap a component, specifying a function to be called on the

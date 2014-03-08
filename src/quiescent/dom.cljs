@@ -25,25 +25,3 @@
   span strong style sub summary sup table tbody td textarea tfoot th thead time
   title tr track u ul var video wbr circle g line path polygon polyline rect svg
   text)
-
-
-;;; IT IS DECIDED:
-
-; focusables are too special-cased. It'd be cool to have a way
-; to short-circuit generalized access to other lifecycle components, *when needed*. Perhaps additional args to q/component?
-
-(comment
-
-  (component-did-update d/input {} (fn))
-
-  (component-did-update (d/input {})
-                        (fn [new-value old-value dom]
-                          (if (:active dom))
-                          ))
-
-  (q/defcomponent FocusableInput [value]
-    (d/input {} foo bar baz)
-    :componentDidUpdate [foo]
-    ()
-    )
-)
