@@ -2,11 +2,7 @@
 
 ## Installation
 
-Quiescent is not yet available in a public Maven repository. To
-install, clone the repository, check out the "0.1.0" tag and run `lein
-install` from the root directory.
-
-Then, add `[quiescent "0.1.0"]` to the dependencies in your
+[Quiescent is available](https://clojars.org/quiescent) via Clojars. Add `[quiescent "0.1.1"]` to the dependencies in your
 ClojureScript project's `project.clj` file.
 
 Require the `quiescent` and/or `quiescent.dom` namespace in your
