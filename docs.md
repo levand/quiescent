@@ -34,9 +34,9 @@ namespace containing a useful macro which you can include using
    "Component representing an article"
    [article]
    (d/div {:className "article"}
-     (d/div {:className "title"} (:title a))
-     (AuthorName (:author a))
-     (d/div {:className "article-body"} (:body a))))
+     (d/div {:className "title"} (:title article))
+     (AuthorName (:author article))
+     (d/div {:className "article-body"} (:body article))))
 
 (q/defcomponent ArticleList
    "Component representing multiple articles"
