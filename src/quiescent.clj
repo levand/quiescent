@@ -2,9 +2,8 @@
 
 (defmacro defcomponent
   "Creates a ReactJS component with the given name, an (optional)
-  docstring and an argument vector (for a single argument) and a body
-  which will be passed as the rendering function to
-  quiescent/component.
+  docstring, an argument vector and a body which will be used as the
+  rendering function to quiescent/component.
 
   Shorthand for:
 
