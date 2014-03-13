@@ -135,7 +135,7 @@ can still use a JS object if you want.)
 Within the `quiescent.dom` namespace, the component constructor names
 match HTML element names.
 
-The arguments for all component functions constructor functions are
+The arguments for all component constructor functions are
 the same: a properties map/object, and any child components.
 
 Some examples:
@@ -172,7 +172,7 @@ Sometimes you need to make data available to a component that isn't
 logically part of the value that it bases its rendering off of. A good
 example of this is the core.async channels that its event handlers
 should dispatch values to, or ambient configuration that doesn't
-effect how an object renders.
+affect how an object renders.
 
 To support this use case, Quiescent allows you to pass more than one
 argument to a component constructor. Any additional arguments to a
@@ -201,7 +201,7 @@ when deciding if a component needs to re-render.
 ```
 
 It is important to emphasize again that beause the values of static
-arguments are not included in the calcuations on whether a component
+arguments are not included in the calculations on whether a component
 should re-render, they should be constant for the full lifetime of the
 component. If you _do_ need changes to result in changes to the HTML,
 you should include them in the primary value you pass to a component
