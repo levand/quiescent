@@ -19,6 +19,9 @@
   arguments. The properties argument may be a Clojure map or a JS
   object."
   [& tags]
-  (apply list 'do (clojure.core/map tag-definition tags)))
+  `(do (do ~@(clojure.core/map tag-definition tags))
+       (def ~'defined-tags
+         ~(zipmap (map (comp keyword name) tags)
+                 tags))))
 
 
