@@ -212,6 +212,8 @@ provided to the component constructor.
 generated UIs.
 - Issue #16 - Allow specification of multiple lifecycle handler functions 
   using the same wrapper component. See documentation on `quiescent/wrapper`.
+- Project no longer has ReactJS as a leiningen dependency; clients are responsible for
+  obtaining the most recent version of ReactJS and incorporating that in their own projects.
 
 ## License
 
