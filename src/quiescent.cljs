@@ -96,7 +96,10 @@
   :onWillMount - will call the provided function with no arguments
   :onWillUnbount - will call the provided function with no arguments"
   [child & kvs]
-  (WrapperComponent (js-props (apply array-map :wrappee child kvs))))
+  (let [props (js-props (apply array-map :wrappee child kvs))]
+    (when-let [key (aget (.-props child) "key")]
+      (aset props "key" key))
+    (WrapperComponent props)))
 
 (defn on-update
   "Wrap a component, specifying a function to be called on the
