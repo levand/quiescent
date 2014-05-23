@@ -104,8 +104,7 @@
 
   The function will be passed the rendered DOM node."
   [child f]
-  (WrapperComponent #js {:wrappee child
-                         :onUpdate f}))
+  (wrapper child :onUpdate f))
 
 (defn on-mount
   "Wrap a component, specifying a function to be called on the
@@ -113,8 +112,7 @@
 
   The function will be passed the rendered DOM node."
   [child f]
-  (WrapperComponent #js {:wrappee child
-                         :onMount f}))
+  (wrapper child :onMount f))
 
 (defn on-render
   "Wrap a component, specifying a function to be called on the
@@ -122,9 +120,7 @@
 
   The function will be passed the rendered DOM node."
   [child f]
-  (WrapperComponent #js {:wrappee child
-                         :onMount f
-                         :onUpdate f}))
+  (wrapper child :onMount f :onUpdate f))
 
 
 (defn on-will-mount
@@ -133,8 +129,7 @@
 
   The function will be called with no arguments."
   [child f]
-  (WrapperComponent #js {:wrappee child
-                         :onWillMount f}))
+  (wrapper child :onWillMount f))
 
 (defn on-will-update
   "Wrap a component, specifying a function to be called on the
@@ -142,8 +137,7 @@
 
   The function will be called with no arguments."
   [child f]
-  (WrapperComponent #js {:wrappee child
-                         :onWillUpdate f}))
+  (wrapper child :onWillUpdate f))
 
 (defn on-will-render
   "Wrap a component, specifying a function to be called on the
@@ -151,9 +145,7 @@
 
   The function will be called with no arguments."
   [child f]
-  (WrapperComponent #js {:wrappee child
-                         :onWillMount f
-                         :onWillUpdate f}))
+  (wrapper child :onWillMount f :onWillUpdate f))
 
 
 (defn on-will-unmount
@@ -162,9 +154,7 @@
 
   The function will be called with no arguments."
   [child f]
-  (WrapperComponent #js {:wrappee child
-                         :onWillUnmount f}))
-
+  (wrapper child :onWillUnmount f))
 
 (defn render
   "Given a ReactJS component, immediately render it, rooted to the
