@@ -10,3 +10,5 @@ pom.xml.asc
 /examples/resources/public/build/*
 /examples/resources/public/main.js
 /examples/resources/public/main.js.map
+.idea
+*.iml
