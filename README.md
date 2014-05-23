@@ -202,6 +202,16 @@ provided to the component constructor.
 
 * The [ReactJS website](http://facebook.github.io/react/) for
   information on ReactJS and how it works.
+  
+## CHANGE LOG
+  
+### 0.1.2
+  
+- Issue #20 - Wrapper components now copy the "key" property from their wrappee.
+- Issue #18 - Define a map of generated DOM functions. This useful for programmatically
+generated UIs.
+- Issue #16 - Allow specification of multiple lifecycle handler functions 
+  using the same wrapper component. See documentation on `quiescent/wrapper`.
 
 ## License
 

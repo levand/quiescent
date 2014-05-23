@@ -94,7 +94,7 @@
              passing the rendered DOM node as a single arg
   :onWillUpdate - will call the provided function with no arguments
   :onWillMount - will call the provided function with no arguments
-  :onWillUnbount - will call the provided function with no arguments"
+  :onWillUnmount - will call the provided function with no arguments"
   [child & kvs]
   (let [props (js-props (apply array-map :wrappee child kvs))]
     (when-let [key (aget (.-props child) "key")]

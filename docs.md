@@ -256,6 +256,25 @@ you want to the underlying node, any changes you make to properties
 managed by ReactJS are likely to be undone the next time the component
 renders.
 
+As of version 0.1.2, it is also possible to define callbacks for multiple
+lifecycle events using a single wrapping component.
+
+To use this functionality, use the `quiescent/wrapper`, passing the wrapped
+component as the first argument and any number of lifecycle ID/handler
+function pairs as additional arguments. Valid lifecycle IDs include: 
+`:onUpdate`, `:onMount`, `:onWillUpdate`, `:onWillMount`, and `:onWillUnmount`.
+ 
+For example:
+ 
+```clojure
+(defcomponent SomeComponent
+  [value]
+  (wrapper (d/input {:id "some-node" :value "some value"})
+    :onMount (fn [node] (.log js/console "Mounted component with DOM node:" node))
+    :onWillUnmount (fn [] (.log js/console "About to unmount component"))))
+ 
+```
+
 ### Accessing the underlying component
 
 Very occasionally, you might need to access the actual ReactJS object
