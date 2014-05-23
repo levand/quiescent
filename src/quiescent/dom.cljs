@@ -3,18 +3,6 @@
   (:require [quiescent :as q])
   (:require-macros [quiescent.dom :as dm]))
 
-(defn js-props
-  "Utility function. Takes an object which is (possibly) a
-  ClojureScript map. If the value is a ClojureScript map, convert it
-  to a JavaScript properties object. Otherwise, return the argument
-  unchanged."
-  [obj]
-  (if (map? obj)
-    (let [o (js-obj)]
-      (doseq [[k v] obj] (aset o (name k) (js-props v)))
-      o)
-    obj))
-
 (dm/define-tags
   a abbr address area article aside audio b base bdi bdo big blockquote body br
   button canvas caption cite code col colgroup data datalist dd del details dfn

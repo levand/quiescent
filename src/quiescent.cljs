@@ -1,5 +1,17 @@
 (ns quiescent)
 
+(defn js-props
+  "Utility function. Takes an object which is (possibly) a
+  ClojureScript map. If the value is a ClojureScript map, convert it
+  to a JavaScript properties object. Otherwise, return the argument
+  unchanged."
+  [obj]
+  (if (map? obj)
+    (let [o (js-obj)]
+      (doseq [[k v] obj] (aset o (name k) (js-props v)))
+      o)
+    obj))
+
 (def ^:dynamic *component*
   "Within a component render function, will be bound to the raw
   ReactJS component." nil)
@@ -69,7 +81,22 @@
                 (binding [*component* this]
                   (f)))))}))
 
+(defn wrapper
+  "Create a wrapper function for a compoment implementing multiple
+  lifecycle functions. Lifecycle functions are specified as any number
+  of additional key-value pairs passed as arguments to this function.
 
+  Valid keys and values include:
+
+  :onUpdate - will call the provided function,
+              passing the rendered DOM node as a single arg
+  :onMount - will call the provided function,
+             passing the rendered DOM node as a single arg
+  :onWillUpdate - will call the provided function with no arguments
+  :onWillMount - will call the provided function with no arguments
+  :onWillUnbount - will call the provided function with no arguments"
+  [child & kvs]
+  (WrapperComponent (js-props (apply array-map :wrappee child kvs))))
 
 (defn on-update
   "Wrap a component, specifying a function to be called on the
