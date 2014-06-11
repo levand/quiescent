@@ -2,7 +2,7 @@
 
 ## Installation
 
-[Quiescent is available](https://clojars.org/quiescent) via Clojars. Add `[quiescent "0.1.1"]` to the dependencies in your
+[Quiescent is available](https://clojars.org/quiescent) via Clojars. Add `[quiescent "0.1.3"]` to the dependencies in your
 ClojureScript project's `project.clj` file.
 
 Require the `quiescent` and/or `quiescent.dom` namespace in your
