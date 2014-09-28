@@ -108,7 +108,7 @@ identically using `defcomponent` as:
 
 ### Rendering
 
-To render a component, use the `quiescent.render` function, which
+To render a component, use the `quiescent/render` function, which
 renders a component to a DOM node. For example, to render the `Hello`
 component from above to a `div` which has an id of `hello-div`:
 
