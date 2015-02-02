@@ -79,7 +79,7 @@
             (this-as this
               (when-let [f (aget (.-props this) "onWillUnmount")]
                 (binding [*component* this]
-                  (f)))))}))
+                  (f (.getDOMNode this))))))}))
 
 (defn wrapper
   "Create a wrapper function for a compoment implementing multiple
@@ -164,3 +164,9 @@
   specified DOM node."
   [component node]
   (.renderComponent js/React component node))
+
+(defn unmount-at-node
+  "Remove a mounted ReactJS component from the DOM and clean up its
+  event handlers and state."
+  [node]
+  (.unmountComponentAtNode js/React node))
