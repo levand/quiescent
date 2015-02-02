@@ -200,7 +200,7 @@ when deciding if a component needs to re-render.
 )
 ```
 
-It is important to emphasize again that beause the values of static
+It is important to emphasize again that because the values of static
 arguments are not included in the calculations on whether a component
 should re-render, they should be constant for the full lifetime of the
 component. If you _do_ need changes to result in changes to the HTML,
