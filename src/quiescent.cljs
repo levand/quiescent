@@ -1,4 +1,5 @@
-(ns quiescent)
+(ns quiescent
+  (:require [cljsjs.react]))
 
 (defn js-props
   "Utility function. Takes an object which is (possibly) a
@@ -12,21 +13,20 @@
       o)
     obj))
 
-(def ^:dynamic *component*
-  "Within a component render function, will be bound to the raw
-  ReactJS component." nil)
+(def ^:dynamic *react-element*
+  "Within a component render function, is be bound to the ReactElement instance." nil)
 
 (defn component
-  "Return a function that will return a ReactJS component, using the
-  provided function as the implementation for React's 'render' method
-  on the component.
+  "Return a function that will return a ReactElement, using the
+  provided function as the 'render' method for a ReactJS component, which is created and
+  instantiated behind-the-scenes.
 
   The given render function should take a single immutable value as
-  its first argument, and return a single ReactJS component.
-  Additional arguments to the component constructor will be passed as
-  additional arguments to the render function whenever it is invoked,
-  but will *not* be included in any calculations regarding whether the
-  component should re-render."
+  its first argument, and return a single ReactElement. Additional arguments to the returned factory
+  function are  /constant arguments/  which will be passed on as additional arguments to the
+  supplied render function, but will *not* be included in any calculations regarding whether the
+  element should re-render. As such, they are suitable for values that will remain constant for
+  the lifetime of the rendered element, such as message channels and configuration objects."
   [renderer]
   (let [react-component
         (.createClass js/React
@@ -38,12 +38,12 @@
                 :render
                 (fn []
                   (this-as this
-                           (binding [*component* this]
+                           (binding [*react-element* this]
                              (apply renderer
                                     (aget (.-props this) "value")
-                                    (aget (.-props this) "statics")))))})]
-    (fn [value & static-args]
-      (react-component #js {:value value :statics static-args}))))
+                                    (aget (.-props this) "constants")))))})]
+    (fn [value & constant-args]
+      (.createElement js/React react-component #js {:value value :constants constant-args}))))
 
 (def WrapperComponent
   "Wrapper component used to mix-in lifecycle access"
@@ -54,31 +54,31 @@
           (fn [prev-props prev-state]
             (this-as this
               (when-let [f (aget (.-props this) "onUpdate")]
-                (binding [*component* this]
+                (binding [*react-element* this]
                   (f (.getDOMNode this))))))
           :componentDidMount
           (fn []
             (this-as this
               (when-let [f (aget (.-props this) "onMount")]
-                (binding [*component* this]
+                (binding [*react-element* this]
                   (f (.getDOMNode this))))))
           :componentWillMount
           (fn []
             (this-as this
               (when-let [f (aget (.-props this) "onWillMount")]
-                (binding [*component* this]
+                (binding [*react-element* this]
                   (f)))))
           :componentWillUpdate
           (fn [_ _]
             (this-as this
               (when-let [f (aget (.-props this) "onWillUpdate")]
-                (binding [*component* this]
+                (binding [*react-element* this]
                   (f)))))
           :componentWillUnmount
           (fn []
             (this-as this
               (when-let [f (aget (.-props this) "onWillUnmount")]
-                (binding [*component* this]
+                (binding [*react-element* this]
                   (f (.getDOMNode this))))))}))
 
 (defn wrapper
@@ -160,13 +160,17 @@
   (wrapper child :onWillUnmount f))
 
 (defn render
-  "Given a ReactJS component, immediately render it, rooted to the
+  "Given an Element, immediately render it, rooted to the
   specified DOM node."
-  [component node]
-  (.renderComponent js/React component node))
+  [element node]
+  (.render js/React element node))
 
-(defn unmount-at-node
-  "Remove a mounted ReactJS component from the DOM and clean up its
-  event handlers and state."
+(defn unmount
+  "Remove a mounted Element from the given DOM node."
   [node]
   (.unmountComponentAtNode js/React node))
+
+(defn ^:deprecated unmount-at-node
+  "DEPRECATED: Use 'unmount' instead."
+  [node]
+  (unmount node))

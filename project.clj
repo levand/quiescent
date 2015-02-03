@@ -1,7 +1,9 @@
-(defproject quiescent "0.1.4"
+(defproject quiescent "0.2.0-SNAPSHOT"
   :description "A minimal, functional ClojureScript wrapper for ReactJS"
   :url "http://github.com/levand/quiescent"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.6.0"]]
+  :dependencies [[org.clojure/clojure "1.7.0-alpha5"]
+                 [org.clojure/clojurescript "0.0-2760"]
+                 [cljsjs/react "0.12.2-5"]]
   :source-paths ["src"])
