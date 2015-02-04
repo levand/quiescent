@@ -17,7 +17,7 @@
   "Within a component render function, is be bound to the ReactElement instance." nil)
 
 (defn component
-  "Return a function that will return a ReactElement, using the
+  "Return a factory function that will return a ReactElement, using the
   provided function as the 'render' method for a ReactJS component, which is created and
   instantiated behind-the-scenes.
 
@@ -99,7 +99,7 @@
   (let [props (js-props (apply array-map :wrappee child kvs))]
     (when-let [key (aget (.-props child) "key")]
       (aset props "key" key))
-    (WrapperComponent props)))
+    (.createElement js/React WrapperComponent props)))
 
 (defn on-update
   "Wrap a component, specifying a function to be called on the
