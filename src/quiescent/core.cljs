@@ -46,9 +46,9 @@
 
 (defn- build-lifecycle-impls
   [opts-map]
-  (reduce merge-with
-    (fn [a b]
-      (throw "Component definition should not provide handlers for both :on-render and (:on-mount | :on-update)."))
+  (reduce (partial merge-with
+            (fn [_ _]
+              (throw "Component definition should not provide handlers for both :on-render and (:on-mount | :on-update).")))
     (map (fn [[key impl]]
            (when-let [impl-map (lifecycle-impls key)]
              (into {} (for [[method impl-ctor] impl-map]
