@@ -1,6 +1,6 @@
 (ns quiescent.dom
   (:refer-clojure :exclude [time map meta])
-  (:require [quiescent :as q])
+  (:require [quiescent.core :as q])
   (:require-macros [quiescent.dom :as dm]))
 
 (dm/define-tags

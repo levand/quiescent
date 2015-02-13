@@ -8,7 +8,7 @@
     `(defn ~tag [& args#]
        ~(str "Return a component for ")
        (let [a# (make-array 0)]
-         (.push a# (quiescent/js-props (first args#)))
+         (.push a# (cljs.core/clj->js (first args#)))
          (doseq [arg# (rest args#)] (.push a# arg#))
          (.apply ~f nil a#)))))
 

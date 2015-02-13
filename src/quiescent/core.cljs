@@ -1,6 +1,6 @@
-(ns quiescent
+(ns quiescent.core
   (:require [cljsjs.react])
-  (:require-macros [quiescent :refer [react-method]]))
+  (:require-macros [quiescent.core :refer [react-method]]))
 
 (def ^:dynamic *component*
   "Within a component lifecycle function, is be bound to the underlying ReactJS instance." nil)

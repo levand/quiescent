@@ -1,4 +1,4 @@
-(ns quiescent)
+(ns quiescent.core)
 
 (defmacro react-method
   "Internal helper macro to avoid code duplication.
@@ -7,7 +7,7 @@
   [args & body]
   `(fn ~args
      (cljs.core/this-as this#
-       (binding [quiescent/*component* this#]
+       (binding [quiescent.core/*component* this#]
          ~@body))))
 
 (defn- extract-docstr
@@ -26,7 +26,7 @@
 (defmacro defcomponent
   "Creates a ReactJS component with the given name, a docstring (optional), any number of
   option->value pairs (optional), an argument vector and any number of forms body, which will be
-  used as the rendering function to quiescent/component.
+  used as the rendering function to quiescent.core/component.
 
   For example:
 
@@ -47,4 +47,4 @@
   (let [[docstr forms] (extract-docstr forms)
         [options forms] (extract-opts forms)
         [argvec & body] forms]
-    `(def ~name ~docstr (quiescent/component (fn ~argvec ~@body) ~options))))
+    `(def ~name ~docstr (quiescent.core/component (fn ~argvec ~@body) ~options))))
