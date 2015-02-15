@@ -144,6 +144,15 @@
   [node]
   (.unmountComponentAtNode js/React node))
 
+(let [factory (.createFactory js/React (.-CSSTransitionGroup (.-addons js/React)))]
+  (defn CSSTransitionGroup
+    "Return a CSSTransitionGroup ReactElement, with the specified transition name and children.
+
+    See http://facebook.github.io/react/docs/animation.html for details on how CSSTransitionGroup
+    works."
+    [name & children]
+    (factory (clj->js {:transitionName name :children children}))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;; Deprecated Wrappers ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
