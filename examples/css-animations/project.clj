@@ -1,4 +1,4 @@
-(defproject quiescent.examples.animations "0.1.0"
+(defproject quiescent.examples.css-animations "0.1.0"
   :plugins [[lein-cljsbuild "1.0.4"]]
   :dependencies [[org.clojure/clojure "1.7.0-alpha5"]
                  [org.clojure/clojurescript "0.0-2843"]
@@ -15,7 +15,4 @@
                       :compiler
                       {:output-to     "resources/public/gen/main.js"
                        :optimizations :advanced
-                       :externs       ["resources/public/tween.min.js"]
-                       :closure-warnings {:externs-validation :off
-                                          :non-standard-jsdoc :off}
-                       :pretty-print  true}}}})
+                       :pretty-print  false}}}})

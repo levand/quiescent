@@ -146,12 +146,28 @@
 
 (let [factory (.createFactory js/React (.-CSSTransitionGroup (.-addons js/React)))]
   (defn CSSTransitionGroup
-    "Return a CSSTransitionGroup ReactElement, with the specified transition name and children.
+    "Return a CSSTransitionGroup ReactElement, with the specified transition options and children.
+    Options must contain at least a :transitionName key.
+
+    Note that unlike DOM factories, children is a single argument containing a seq of children, not
+    a vararg.
 
     See http://facebook.github.io/react/docs/animation.html for details on how CSSTransitionGroup
     works."
-    [name & children]
-    (factory (clj->js {:transitionName name :children children}))))
+    [opts children]
+    (factory (clj->js (assoc opts :children children)))))
+
+(let [factory (.createFactory js/React (.-TransitionGroup (.-addons js/React)))]
+  (defn TransitionGroup
+    "Return a TransitionGroup ReactElement, with the specified properties and children.
+
+    Note that unlike DOM factories, children is a single argument containing a seq of children, not
+    a vararg.
+
+    See http://facebook.github.io/react/docs/animation.html for details on how TransitionGroup
+    works."
+    [props children]
+    (factory (clj->js (assoc props :children children)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;; Deprecated Wrappers ;;;;;;;;;;;;;;;;;;;;;;;;;;

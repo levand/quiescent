@@ -1,30 +1,12 @@
-.css-transition-container {
+.transition-container {
 margin-top: 10px;
 }
 
-.css-transition-item {
+.transition-item {
   text-align: center;
   width: 150px;
   color: white;
   background-color: black;
   padding: 10px;
   cursor: pointer;
-}
-
-.my-transition-enter {
-  opacity: 0.01;
-  transition: opacity .2s ease-in;
-}
-
-.my-transition-enter.my-transition-enter-active {
-  opacity: 1;
-}
-
-.my-transition-leave {
-  opacity: 1;
-  transition: opacity .2s ease-in;
-}
-
-.my-transition-leave.my-transition-leave-active {
-  opacity: 0.01;
 }
