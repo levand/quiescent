@@ -134,7 +134,9 @@
                  (build-lifecycle-impls opts))
           react-component (.createClass js/React (clj->js impl))]
       (fn [value & constant-args]
-        (let [props #js {:value value :constants constant-args}]
+        (let [props (js-obj)]
+          (set! (.-value props) value)
+          (set! (.-constants props) constant-args)
           (when-let [keyfn (:keyfn opts)]
             (set! (.-key props) (keyfn value)))
           (.createElement js/React react-component props))))))
