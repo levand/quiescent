@@ -8,9 +8,6 @@ An obligatory [TodoMVC implementation](https://github.com/levand/todomvc/tree/gh
 See the [documentation](docs.md) for instructions and examples of how
 to use Quiescent.
 
-Quiescent is still alpha/experimental software, use at your own risk,
-etc.
-
 ## Rationale
 
 ReactJS is an extremely interesting approach to UI rendering for
@@ -181,32 +178,51 @@ however, is passed the immutable value that was used to construct the
 function. It is also passed any additional arguments that were
 provided to the component constructor.
 
-## Future Plans
-
-* I would like to create a set of benchmarks comparing Quiescent's
-  performance with Om, vanilla ReactJS and possibly other JavaScript
-  MVC toolkits.
-
-* I have some ideas around creating a common protocol for obtaining
-  ReactJS components that would make it much easier to provide
-  alternative implementations and syntaxes for component definitions
-  (e.g., ERB, Yaml, Hiccup, Enlive, etc). There is a lot of potential
-  to suit the actual syntax used to define components to the
-  developers (or designers!) tasked with designing the structure of
-  the DOM.
-
-  This could easily be rolled in as a part of Quiescent (and possibly
-  adopted by other ReactJS-based libraries as well).
-
 ## See Also
 
 * The [ReactJS website](http://facebook.github.io/react/) for
   information on ReactJS and how it works.
-  
+
 ## CHANGE LOG
-  
+
+### 0.2.0
+
+Warning: This release contains breaking changes.
+
+- **breaking change**: The primary namespace has been renamed from
+  `quiescent` to `quiescent.core` to avoid a single-segment namespace,
+  which could cause a variety of problems.
+- **breaking change**: Quiescent now includes a transitive dependency
+  to ReactJS using ClojureScript's new, expanded foreign library
+  support
+  (https://github.com/clojure/clojurescript/wiki/Foreign-Dependencies). You
+  do not need to, and should not, include ReactJS either in your
+  ClojureScript preamble nor in your HTML.
+- Support for new versions of ReactJS.
+- The "wrapper" functionality is deprecated (see explanation below).
+- Instead, you can now supply explicit lifecycle hooks when defining
+  components.
+- Keys are now supported on custom components.
+- Added support for naming custom components, which will be helpful
+  for debugging (including the debugging browser extensions provided
+  by ReactJS).
+- Added support for ReactJS' animation extensions (http://facebook.github.io/react/docs/animation.html)
+
+#### motivation for wrapper deprecation
+
+As it turns out, there is no way in the current model that wrappers
+can provide the desired functionality in all cases.
+
+A wrapper component can only modify its _own_ lifecycle methods, not
+truly those of its child. But neither can it access the
+"shouldComponentUpdate" of the child - it must have a
+"shouldComponentUpdate" that constantly returns true. Therefore, an
+"onRender" wrapper would fire *even if* the wrapped component
+explicitly did not render due to an unchanged value (or otherwise
+overriding "shouldComponentUpdate").
+
 ### 0.1.2
-  
+
 - Issue #20 - Wrapper components now copy the "key" property from their wrappee.
 - Issue #18 - Define a map of generated DOM functions. This useful for programmatically
 generated UIs.
@@ -217,6 +233,6 @@ generated UIs.
 
 ## License
 
-Copyright © 2014 Luke VanderHart
+Copyright © 2014-2015 Luke VanderHart
 
 Distributed under the Eclipse Public License (see LICENSE file).
