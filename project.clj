@@ -5,5 +5,5 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0-alpha5"]
                  [org.clojure/clojurescript "0.0-2760"]
-                 [cljsjs/react-with-addons "0.12.2-4"]]
+                 [cljsjs/react-with-addons "0.12.2-7"]]
   :source-paths ["src"])
