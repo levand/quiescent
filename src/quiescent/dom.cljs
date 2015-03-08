@@ -1,7 +1,7 @@
 (ns quiescent.dom
   (:refer-clojure :exclude [time map meta])
-  (:require [quiescent.core :as q])
-  (:require-macros [quiescent.dom :as dm]))
+  (:require-macros [quiescent.dom :as dm])
+  (:require [cljsjs.react]))
 
 (dm/define-tags
   a abbr address area article aside audio b base bdi bdo big blockquote body br
