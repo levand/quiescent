@@ -2,7 +2,8 @@
 
 ## Installation
 
-[Quiescent is available](https://clojars.org/quiescent) via Clojars. Add `[quiescent "0.2.0"]` to the dependencies in your
+[Quiescent is available](https://clojars.org/quiescent) via
+Clojars. Add `[quiescent "0.2.0-alpha1"]` to the dependencies in your
 ClojureScript project's `project.clj` file.
 
 Require the `quiescent.core` and/or `quiescent.dom` namespaces in your
@@ -353,6 +354,58 @@ Previous versions of Quiescent used *wrappers*, a different technique
 to access ReactJS lifecycle methods. These are still available but are
 deprecated, since it is impossible to make them work correctly in all
 cases. See the release notes on version 0.2.0 for more information.
+
+### Cursor jumping and controlled inputs
+
+By default, if you provide a `value` property to an `input` or
+`textarea` DOM component, ReactJS will turn that component into a
+[Controlled Component](http://facebook.github.io/react/docs/forms.html#controlled-components).
+
+This means that values typed by the user are discarded after the event
+handlers fire, so that the actual DOM value of the field is guaranteed
+to match matches the ReactJS `value` property. To actually change the
+value, you need to update the `value` property.
+
+In React, unless a re-render is called *synchronously* from within the
+event handler, the field will be changed *back* to the original value
+(because it is controlled), then changed *again* to the new value,
+which causes the cursor to jump to the end of the field. See [this
+StackOverflow question](http://stackoverflow.com/questions/28922275/in-reactjs-why-does-setstate-behave-differently-when-called-synchronously/28922465)
+for a more detailed analysis of this phenomenon.
+
+Unfortunately, Quiescent provides no mechanism for synchronous
+re-rendering within an event handler - all rendering is top-down by
+philosophy and design.
+
+However, there are two other ways to avoid having cursors jump around
+in a Quiescent-managed input.
+
+One is to commit changes back to the application state inside an
+`onBlur` event, rather than `onChange`. This means that the
+application state is only updated once, when the edit is complete,
+rather than on every keystroke. For many applications this is
+acceptable and even desirable, since it decreases the number of state
+updates, therefore increasing performance.
+
+But some applications do need to capture every keystroke in the
+application state. For this purpose, Quiescent provides *unmanaged*
+versions of the `input` and `textarea` components, found in the
+`quiescent.dom.uncontrolled` namespace. These unmanaged components
+have the same API as their managed counterparts, and will still
+re-render whenever thier `value` property is changed. However, they
+also allow users to type freely and will not constantly reset their
+DOM value back to the `value` property after it has been edited by the
+user. If the `value` property is set to the same value as the DOM
+value, the DOM value is not updated, avoiding a cursor jump.
+
+This means that they can be used exactly as expected in a Quiescent
+application, with their `onChange` constantly updating the application
+state, and the application state re-rendering at some future point,
+without any cursor jumping. Note that if you set a `value` property to
+something different than the current DOM value, the cursor will still
+jump to the end of the input when the new value is applied.
+
+See the `examples/uncontrolled-inputs` directory for a working example.
 
 ### Accessing the underlying component
 
