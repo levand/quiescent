@@ -207,6 +207,8 @@ Warning: This release contains breaking changes.
   for debugging (including the debugging browser extensions provided
   by ReactJS).
 - Added support for ReactJS' animation extensions (http://facebook.github.io/react/docs/animation.html)
+- Added an examples directory
+- Added support for uncontrolled inputs (fixes #32 and #36).
 
 #### motivation for wrapper deprecation
 
