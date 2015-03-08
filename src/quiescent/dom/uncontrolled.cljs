@@ -25,7 +25,3 @@
 (def textarea
   "Returns an uncontrolled textara component constructor"
   (uncontrolled-component "uncontrolled-textarea" js/React.DOM.textarea))
-
-(def option
-  "Returns an uncontrolled option component constructor"
-  (uncontrolled-component "uncontrolled-option" js/React.DOM.option))
