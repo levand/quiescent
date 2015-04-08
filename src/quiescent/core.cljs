@@ -319,10 +319,7 @@
   (wrapper child :onWillUnmount f))
 
 (defn render
-  "DEPRECATED. Wrappers do not work properly. Prefer adding lifecycle
-   methods at component creation time.
-
-   Given an Element, immediately render it, rooted to the
+  "Given an Element, immediately render it, rooted to the
    specified DOM node."
   [element node]
   (.render js/React element node))
