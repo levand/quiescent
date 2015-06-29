@@ -12,7 +12,7 @@
   built-in ReactJS element constructors)."
   [type]
   (fn [props & children]
-    (apply js/React.createElement type (cljs->js props) children)))
+    (apply js/React.createElement type (clj->js props) children)))
 
 (dm/define-tags
   a abbr address area article aside audio b base bdi bdo big blockquote body br

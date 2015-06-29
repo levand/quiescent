@@ -22,15 +22,14 @@
   not cause the element to become a controlled component."
   [name delegate]
   (js/React.createClass
-   (clj->js
-    :getDisplayName (fn [] (str "uncontrolled-" name))
-    :render (fn []
-              (this-as this
-                (let [new-props (gobj/clone (.-props this))]
-                  (js-delete new-props "value")
-                  (js/React.createElement delegate new-props))))
-    :componentDidUpdate reset-value
-    :componentDidMount reset-value)))
+   (clj->js {:getDisplayName (fn [] (str "uncontrolled-" name))
+             :render (fn []
+                       (this-as this
+                                (let [new-props (gobj/clone (.-props this))]
+                                  (js-delete new-props "value")
+                                  (js/React.createElement delegate new-props))))
+             :componentDidUpdate reset-value
+             :componentDidMount reset-value})))
 
 (def input (dom/constructor (uncontrolled-component "input" "input")))
 (def textarea (dom/constructor (uncontrolled-component "textarea" "textarea")))

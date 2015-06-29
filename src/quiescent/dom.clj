@@ -4,9 +4,10 @@
   "Return a form to defining a wrapper function for a ReactJS tag
   component."
   [tag]
-  `(defn ~tag [& args#]
-     ~(str "Return a component for " (name tag))
-     (apply quiescent.dom/constructor ~(name tag) args#)))
+  `(let [ctor# (quiescent.dom/constructor ~(name tag))]
+     (defn ~tag [& args#]
+       ~(str "Return a component for " (name tag))
+       (apply ctor# args#))))
 
 (defmacro define-tags
   "Macro which expands to a do block that defines top-level constructor functions

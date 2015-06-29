@@ -13,8 +13,8 @@
 (defn render
   []
   (q/render
-    (Container @data)
-    (.getElementById js/document "content")))
+   (Container @data)
+   (.getElementById js/document "content")))
 
 (defn add-handler
   []
