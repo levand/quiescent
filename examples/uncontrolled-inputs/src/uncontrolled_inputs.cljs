@@ -19,6 +19,12 @@
               :className "uncontrolled-input-with-no-value"
               :onChange (fn [evt]
                           (swap! state-atom assoc :sample-input
+                                 (.-value (.-target evt))))})
+   (du/input {:style {:margin "10px"}
+              :value nil
+              :className "uncontrolled-input-with-nil-value"
+              :onChange (fn [evt]
+                          (swap! state-atom assoc :sample-input
                                  (.-value (.-target evt))))})))
 
 (q/defcomponent SampleTextArea
