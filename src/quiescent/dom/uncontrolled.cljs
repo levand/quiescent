@@ -1,27 +1,37 @@
 (ns quiescent.dom.uncontrolled
-  (:require [quiescent.core :as q]
+  (:require [goog.object :as gobj]
+            [quiescent.dom :as dom]
             [cljsjs.react]))
 
-(defn- uncontrolled-component
-  "Delegate should be a raw ReactJS constructor.
+(defn- reset-value
+  "Implementation of componentDidMount/Update - resets the value of
+  the underlying node"
+  []
+  (this-as this
+    (let [props (.-props this)
+          node (js/React.findDOMNode this)]
+      (when (not= (.-value node) (.-value props))
+        (set! (.-value node) (.-value props))))))
 
-   Prop values are the same as that of the ReactJS delegate element,
-   with the exception that setting 'value' will not cause the element
-   to become a controlled component."
-  [name delegate-ctor]
-  (q/component (fn [props]
-                 (let [js-props (clj->js (dissoc props :value))]
-                   (delegate-ctor js-props)))
-               {:name name
-                :on-render (fn [node props _ _]
-                             (when (not= (.-value node) (:value props))
-                               (set! (.-value node) (:value props))))}))
+(defn uncontrolled-component
+  "Delegate should be a valid argument to React.createElement (that
+  is, a tag name or a ReactClass.)
 
+  Returns a ReactJS class that behaves in all respects as the
+  delegate, with the exception that setting the 'value' property will
+  not cause the element to become a controlled component."
+  [name delegate]
+  (js/React.createClass
+   (clj->js
+    :getDisplayName (fn [] (str "uncontrolled-" name))
+    :render (fn []
+              (this-as this
+                (let [new-props (gobj/clone (.-props this))]
+                  (js-delete new-props "value")
+                  (js/React.createElement delegate new-props))))
+    :componentDidUpdate reset-value
+    :componentDidMount reset-value)))
 
-(def input
-  "Returns an uncontrolled input component constructor"
-  (uncontrolled-component "uncontrolled-input" js/React.DOM.input))
-
-(def textarea
-  "Returns an uncontrolled textara component constructor"
-  (uncontrolled-component "uncontrolled-textarea" js/React.DOM.textarea))
+(def input (dom/constructor (uncontrolled-component "input" "input")))
+(def textarea (dom/constructor (uncontrolled-component "textarea" "textarea")))
+(def option (dom/constructor (uncontrolled-component "option" "option")))
