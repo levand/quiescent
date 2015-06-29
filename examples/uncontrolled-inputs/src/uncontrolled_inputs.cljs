@@ -8,11 +8,18 @@
 
 (q/defcomponent SampleInput
   [val]
-  (du/input {:value val
-             :style {:margin "10px"}
-             :onChange (fn [evt]
-                         (swap! state-atom assoc :sample-input
-                                (.-value (.-target evt))))}))
+  (d/div {}
+   (du/input {:value val
+              :className "uncontrolled-input-with-value"
+              :style {:margin "10px"}
+              :onChange (fn [evt]
+                          (swap! state-atom assoc :sample-input
+                                 (.-value (.-target evt))))})
+   (du/input {:style {:margin "10px"}
+              :className "uncontrolled-input-with-no-value"
+              :onChange (fn [evt]
+                          (swap! state-atom assoc :sample-input
+                                 (.-value (.-target evt))))})))
 
 (q/defcomponent SampleTextArea
   [val]
