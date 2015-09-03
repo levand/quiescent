@@ -46,5 +46,6 @@
   [name & forms]
   (let [[docstr forms] (extract-docstr forms)
         [options forms] (extract-opts forms)
-        [argvec & body] forms]
+        [argvec & body] forms
+        options (merge {:name (str name)} options)]
     `(def ~name ~docstr (quiescent.core/component (fn ~argvec ~@body) ~options))))
