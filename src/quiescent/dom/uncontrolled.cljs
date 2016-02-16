@@ -1,12 +1,13 @@
 (ns quiescent.dom.uncontrolled
   (:require [goog.object :as gobj]
             [quiescent.dom :as dom]
-            [cljsjs.react]))
+            [cljsjs.react]
+            [cljsjs.react.dom]))
 
 (let [reset-value (fn []
                     (this-as this
                              (let [props (.-props this)
-                                   node (js/React.findDOMNode this)]
+                                   node (js/ReactDOM.findDOMNode this)]
                                (when (and (.-value props)
                                           (not= (.-value node) (.-value props)))
                                  (set! (.-value node) (.-value props))))))]
