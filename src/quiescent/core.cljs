@@ -1,5 +1,6 @@
 (ns quiescent.core
-  (:require [cljsjs.react])
+  (:require [cljsjs.react]
+            [cljsjs.react.dom])
   (:require-macros [quiescent.core :refer [react-method]]))
 
 (def ^:dynamic *component*
@@ -10,27 +11,27 @@
   (let [basic (fn [impl]
                 (react-method []
                   (apply impl
-                    (.getDOMNode *component*)
+                    (.findDOMNode js/ReactDOM *component*)
                     (.-value (.-props *component*))
                     (.-constants (.-props *component*)))))
         with-old-value (fn [impl]
                          (react-method [prev-props _]
                            (apply impl
-                             (.getDOMNode *component*)
+                             (.findDOMNode js/ReactDOM *component*)
                              (.-value (.-props *component*))
                              (.-value prev-props)
                              (.-constants (.-props *component*)))))
         with-nil-old-value (fn [impl]
                              (react-method []
                                (apply impl
-                                 (.getDOMNode *component*)
+                                 (.findDOMNode js/ReactDOM *component*)
                                  (.-value (.-props *component*))
                                  nil
                                  (.-constants (.-props *component*)))))
         with-callback (fn [impl]
                         (react-method [cb]
                           (apply impl
-                            (.getDOMNode *component*)
+                            (.findDOMNode js/ReactDOM *component*)
                             cb
                             (.-value (.-props *component*))
                             (.-constants (.-props *component*)))))]
@@ -144,7 +145,7 @@
 (defn unmount
   "Remove a mounted Element from the given DOM node."
   [node]
-  (.unmountComponentAtNode js/React node))
+  (.unmountComponentAtNode js/ReactDOM node))
 
 (let [factory (.createFactory js/React (.-CSSTransitionGroup (.-addons js/React)))]
   (defn CSSTransitionGroup
@@ -185,13 +186,13 @@
             (this-as this
               (when-let [f (aget (.-props this) "onUpdate")]
                 (binding [*component* this]
-                  (f (.getDOMNode this))))))
+                  (f (.findDOMNode js/ReactDOM this))))))
           :componentDidMount
           (fn []
             (this-as this
               (when-let [f (aget (.-props this) "onMount")]
                 (binding [*component* this]
-                  (f (.getDOMNode this))))))
+                  (f (.findDOMNode js/ReactDOM this))))))
           :componentWillMount
           (fn []
             (this-as this
@@ -209,7 +210,7 @@
             (this-as this
               (when-let [f (aget (.-props this) "onWillUnmount")]
                 (binding [*component* this]
-                  (f (.getDOMNode this))))))}))
+                  (f (.findDOMNode js/ReactDOM this))))))}))
 
 (let [did-warn (atom false)]
   (defn wrapper
@@ -322,7 +323,7 @@
   "Given an Element, immediately render it, rooted to the
    specified DOM node."
   [element node]
-  (.render js/React element node))
+  (.render js/ReactDOM element node))
 
 (defn ^:deprecated unmount-at-node
   "DEPRECATED: Use 'unmount' instead."
