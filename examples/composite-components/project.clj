@@ -2,7 +2,7 @@
   :plugins [[lein-cljsbuild "1.1.2"]]
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.7.228"]
-                 [quiescent/quiescent "0.3.0-SNAPSHOT"]
+                 [quiescent/quiescent "0.3.0"]
                  [cljsjs/react-bootstrap "0.28.1-0" :exclusions [[cljsjs/react]]]]
   :clean-targets ^{:protect false} [:target-path :compile-path "resources/public/gen"]
   :cljsbuild {:builds
