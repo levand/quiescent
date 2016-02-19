@@ -12,5 +12,6 @@
   map mark menu menuitem meta meter nav noscript object ol optgroup option output
   p param pre progress q rp rt ruby s samp script section select small source
   span strong style sub summary sup table tbody td textarea tfoot th thead time
-  title tr track u ul var video wbr circle g line path polygon polyline rect svg
-  text)
+  title tr track u ul var video wbr circle clipPath defs ellipse g image line
+  linearGradient mask path pattern polygon polyline radialGradient rect stop svg
+  text tspan)

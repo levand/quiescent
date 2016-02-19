@@ -1,4 +1,4 @@
-(defproject quiescent "0.3.0"
+(defproject quiescent "0.3.1-SNAPSHOT"
   :description "A minimal, functional ClojureScript wrapper for ReactJS"
   :url "http://github.com/levand/quiescent"
   :license {:name "Eclipse Public License"
