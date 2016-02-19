@@ -4,7 +4,7 @@
   "Return a form to defining a wrapper function for a ReactJS tag
   component."
   [tag]
-  `(let [ctor# (quiescent.dom/constructor ~(name tag))]
+  `(let [ctor# (quiescent.factory/factory ~(name tag))]
      (defn ~tag [& args#]
        ~(str "Return a component for " (name tag))
        (apply ctor# args#))))

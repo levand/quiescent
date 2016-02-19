@@ -6,5 +6,5 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.7.228"]
                  [cljsjs/react-with-addons "0.14.3-0"]
-                 [cljsjs/react-dom "0.14.3-1"]]
+                 [cljsjs/react-dom "0.14.3-1" :exclusions [cljsjs/react]]]
   :source-paths ["src"])

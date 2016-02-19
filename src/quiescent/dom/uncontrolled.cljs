@@ -1,6 +1,6 @@
 (ns quiescent.dom.uncontrolled
   (:require [goog.object :as gobj]
-            [quiescent.dom :as dom]
+            [quiescent.factory :as factory]
             [cljsjs.react]
             [cljsjs.react.dom]))
 
@@ -29,6 +29,6 @@
                :componentDidUpdate reset-value
                :componentDidMount reset-value}))))
 
-(def input (dom/constructor (uncontrolled-component "input" "input")))
-(def textarea (dom/constructor (uncontrolled-component "textarea" "textarea")))
-(def option (dom/constructor (uncontrolled-component "option" "option")))
+(def input (factory/factory (uncontrolled-component "input" "input")))
+(def textarea (factory/factory (uncontrolled-component "textarea" "textarea")))
+(def option (factory/factory (uncontrolled-component "option" "option")))
