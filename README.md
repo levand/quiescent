@@ -185,6 +185,17 @@ provided to the component constructor.
 
 ## CHANGE LOG
 
+### 0.3.1
+
+- Add newly supported SVG tags which React supports (#43)
+
+### 0.3.0
+
+- Upgrade to React 0.14 (#56)
+- Use symbol name for defcomponent as default React component name (#46)
+- Make it easier to idiomatically use React components defined elsewhere
+  (for example, React Bootstrap). (Inspired by #40)
+
 ### 0.2.0
 
 Warning: This release contains breaking changes.
