@@ -5,6 +5,6 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.7.228"]
-                 [cljsjs/react-with-addons "0.14.3-0"]
-                 [cljsjs/react-dom "0.14.3-1" :exclusions [cljsjs/react]]]
+                 [cljsjs/react-with-addons "15.1.0-0"]
+                 [cljsjs/react-dom "15.1.0-0" :exclusions [cljsjs/react]]]
   :source-paths ["src"])

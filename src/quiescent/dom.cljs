@@ -1,5 +1,5 @@
 (ns quiescent.dom
-  (:refer-clojure :exclude [time map meta])
+  (:refer-clojure :exclude [time map meta mask])
   (:require-macros [quiescent.dom :as dm])
   (:require [quiescent.factory]
             [cljsjs.react]))
