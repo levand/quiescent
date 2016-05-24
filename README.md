@@ -185,6 +185,11 @@ provided to the component constructor.
 
 ## CHANGE LOG
 
+### 0.3.2
+
+- Upgrade to React 15.1.0 (#58)
+- Ignore `mask` from cljs.core to avoid compiler warning (#57)
+
 ### 0.3.1
 
 - Add newly supported SVG tags which React supports (#43)
